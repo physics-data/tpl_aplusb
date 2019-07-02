@@ -27,7 +27,7 @@ def file_lines(file):
                 lines.append(line)
     return lines
 
-for file in files:
+for file in sorted(files):
     file_in = join(path, file)
     num = int(file[2:-4])
     file_ans = join(path, 'ans%d.txt' % num)
@@ -40,7 +40,7 @@ for file in files:
     if file_lines(file_ans) == file_lines(file_out):
         grade += 100.0 / len(files)
     elif os.isatty(1):
-        print('expected %s, but got %s' % (file_lines(file_ans), file_lines(file_out)))
+        print('Data %d: expected %s, but got %s' % (num, file_lines(file_ans), file_lines(file_out)))
 
 data['grade'] = grade
 if os.isatty(1):
