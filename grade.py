@@ -39,6 +39,8 @@ for file in files:
     os.system('%s aplusb.py < %s > %s' % (sys.executable, file_in, file_out))
     if file_lines(file_ans) == file_lines(file_out):
         grade += 100.0 / len(files)
+    elif os.isatty(1):
+        print('expected %s, but got %s' % (file_lines(file_ans), file_lines(file_out)))
 
 data['grade'] = grade
 if os.isatty(1):
