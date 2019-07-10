@@ -38,18 +38,22 @@ for file in sorted(files):
         os.remove(file_out)
     except FileNotFoundError:
         pass
-    
-    p = subprocess.Popen([sys.executable, 'aplusb.py'], stdin=open(file_in, 'r'), stdout=open(file_out,'w'), stderr=open(os.devnull,'w'))
+    p = subprocess.Popen([sys.executable, 'aplusb.py'], stdin=open(file_in, 'r'), stdout=open(file_out,'w'), stderr=subprocess.PIPE)
     start_time = time.time()
 
     while p.poll() is None:
         if time.time() - start_time > 1:
             p.kill()
-    
+
     if file_lines(file_ans) == file_lines(file_out):
         grade += 100.0 / len(files)
     elif os.isatty(1):
-        print('Data %d: expected %s, but got %s' % (num, file_lines(file_ans), file_lines(file_out)))
+        print('Data %d: expected %s, but got %s' % (num, repr(file_lines(file_ans)), repr(file_lines(file_out))))
+        stdout, stderr = p.communicate(timeout=1)
+        if len(stderr) > 0:
+            print('       : your program exited with:')
+            sys.stdout.buffer.write(stderr)
+
 
 data['grade'] = grade
 if os.isatty(1):
