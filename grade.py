@@ -57,6 +57,6 @@ for file in sorted(files):
 
 data['grade'] = grade
 if os.isatty(1):
-    print('得分：%d/80' % grade)
+    print('Grade: %d/80' % grade)
 else:
     print(json.dumps(data))
