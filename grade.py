@@ -46,7 +46,7 @@ for file in sorted(files):
             p.kill()
 
     if file_lines(file_ans) == file_lines(file_out):
-        grade += 100.0 / len(files)
+        grade += 80.0 / len(files)
     elif os.isatty(1):
         print('Data %d: expected %s, but got %s' % (num, repr(file_lines(file_ans)), repr(file_lines(file_out))))
         stdout, stderr = p.communicate(timeout=1)
@@ -57,6 +57,6 @@ for file in sorted(files):
 
 data['grade'] = grade
 if os.isatty(1):
-    print('得分：%d/100' % grade)
+    print('得分：%d/80' % grade)
 else:
     print(json.dumps(data))
