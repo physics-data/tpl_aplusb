@@ -9,11 +9,13 @@ import filecmp
 import time
 import subprocess
 
-FILENAME = 'aplusb.py'
+PROGRAM = 'aplusb.py'
 FULL_SCORE = 80
 TIME_LIMIT = 1.0
 DATA_PATH = 'data'
 
+if len(sys.argv) > 1:
+    PROGRAM = sys.argv[1]
 
 if sys.version_info[0] != 3:
     print("Plz use python3")
@@ -45,7 +47,7 @@ if __name__ == '__main__':
             os.remove(file_out)
         except FileNotFoundError:
             pass
-        p = subprocess.Popen([sys.executable, FILENAME], stdin=open(
+        p = subprocess.Popen([sys.executable, PROGRAM], stdin=open(
             file_in, 'r'), stdout=open(file_out, 'w'), stderr=subprocess.PIPE)
         start_time = time.time()
 
