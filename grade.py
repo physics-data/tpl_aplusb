@@ -36,7 +36,8 @@ if __name__ == '__main__':
 
     grade = 0
     data = dict()
-    files = [f for f in os.listdir(DATA_PATH) if isfile(join(DATA_PATH, f)) and f.startswith('in')]
+    files = [f for f in os.listdir(DATA_PATH) if isfile(
+        join(DATA_PATH, f)) and f.startswith('in')]
 
     for file in sorted(files):
         file_in = join(DATA_PATH, file)
@@ -60,7 +61,7 @@ if __name__ == '__main__':
             grade += FULL_SCORE / len(files)
         elif os.isatty(1):
             print('Data %d: expected %s, but got %s' %
-                (num, repr(ans), repr(out)))
+                  (num, repr(ans), repr(out)))
             stdout, stderr = p.communicate(timeout=1)
             if len(stderr) > 0:
                 print('       : your program exited with:')
